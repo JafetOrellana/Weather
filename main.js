@@ -1,13 +1,11 @@
   class centro {
-    constructor(nombre, latitude, longitude) {
-      this.nombre = nombre;
+    constructor(name, latitude, longitude) {
+      this.name = name;
       this.latitude = latitude;
       this.longitude = longitude;
       this.temperature = null;
       this.temperatureDescription = null;
-      this.windVelocity = null;
-      this.maxTemp = null;
-      this.minTemp = null;
+      this.windSpeed = null;
       this.pressure = null;
       this.feelsLike = null;
       this.fetchData();
@@ -21,9 +19,8 @@
         const data = await response.json();
         this.temperature = `${Math.round(data.main.temp)}°`;
         this.temperatureDescription = data.weather[0].description;
-        this.windVelocity = `${data.wind.speed} m/s`;
-        this.maxTemp = `${Math.round(data.main.temp_max)}°`;
-        this.minTemp = `${Math.round(data.main.temp_min)}°`;
+        this.windSpeed = `${data.wind.speed} m/s`;
+        this.feelsLike = `${Math.round(data.main.feels_like)}°`;
         this.pressure = `${data.main.pressure} mb`;
 
       } catch (error) {
@@ -56,6 +53,64 @@
     await unahCuroc.fetchData();
     await unahTecDanli.fetchData();
     await unahTecAguan.fetchData();
+
+    let centers = [unahCu, unahCurc, unahCurla, unahCurlp, unahCurno , unahCuroc, unahTecAguan, unahTecDanli, unahVs];
+    let data = ["name","temperature"/*, "temperatureDescription"*/, "feelsLike", "pressure", "windSpeed"];
+
+
+
+
+    centers.forEach(center => {
+      data.forEach(idSelector => {
+        var element = document.querySelector(`#${center.name} #${idSelector}`);
+        element.textContent += center[idSelector]; 
+      });
+
+      let animatedIcon = document.getElementById("animatedIcon")
+      let description = document.querySelector(`#${center.name} #temperatureDescription`);
+      switch (center.temperatureDescription) {
+        case 'Thunderstorm':
+          animatedIcon.src='svg icons/animated/thunder.svg'
+          description.textContent = ('TORMENTA');
+          break;
+        case 'Drizzle':
+          animatedIcon.src='svg icons/animated/rainy-2.svg'
+          description.textContent = ('LLOVIZNA');
+          break;
+        case 'Rain':
+          animatedIcon.src='svg icons/animated/rainy-7.svg'
+          description.textContent = ('LLUVIA');
+          break;
+        case 'Snow':
+          animatedIcon.src='svg icons/animated/snowy-6.svg'
+            description.textContent = ('NIEVE');
+          break;                        
+        case 'Clear':
+            animatedIcon.src='svg icons/animated/day.svg'
+            description.textContent = ('LIMPIO');
+          break;
+        case 'Atmosphere':
+          animatedIcon.src='svg icons/animated/weather.svg'
+            description.textContent = ('ATMOSFERA');
+            break;  
+        case 'Clouds':
+            animatedIcon.src='svg icons/animated/cloudy-day-1.svg'
+            description.textContent = ('NUBES');
+            break;  
+            case 'few clouds':
+              animatedIcon.src='svg icons/animated/cloudy.svg'
+              description.textContent = ('ALGUNAS NUBES');
+              break;
+        default:
+          animatedIcon.src='svg icons/animated/cloudy-day-1.svg'
+          description.textContent = ('por defecto');
+      }
+    });
+    
+
   }
   
+
+
   main();
+  
