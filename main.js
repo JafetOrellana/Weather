@@ -14,7 +14,6 @@
     async fetchData() {
       try {
         const url = `https://api.openweathermap.org/data/2.5/weather?lat=${this.latitude}&lon=${this.longitude}&appid=e89d8d3d900ad5740b9577386f97d31a&units=metric`;
-        console.log(url);
         const response = await fetch(url);
         const data = await response.json();
         this.temperature = `${Math.round(data.main.temp)}°`;
@@ -46,7 +45,7 @@
     
     
     await unahVs.fetchData();
-    await unahCu.fetchData(); // Esperar hasta que se obtengan los datos
+    await unahCu.fetchData(); 
     await unahCurla.fetchData();
     await unahCurc.fetchData();
     await unahCurlp.fetchData();
