@@ -35,18 +35,19 @@
   
   async function main() {
     const unahCu = new centro("UNAH-CU", "14.084538933654455", "-87.16708894884279");
+    const unahVs = new centro("UNAH-VS", "15.5299", "-88.0357");
     const unahCurc = new centro("UNAH-CURC", "14.430212311249582", "-87.63352877297008");
     const unahCurla = new centro("UNAH-CURLA","15.739013524664774","-86.84958061544728");
     const unahCurlp = new centro("UNAH-CURLP", "13.334113009899987" , "-87.1379086638365");
     const unahCurno = new centro("UNAH-CURNO", "14.7053403411947", "-86.17740231527047");
     const unahCuroc = new centro("UNAH-CUROC", "14.794436793206298", "-88.77173601163906");
-    const unahTecDanli = new centro("UNAH-TEC Danlí", "13.99336832671218", "-86.57028033349991");
-    const unahTecAguan = new centro("UNAH-TEC Aguán", "15.494681447231422", "-86.5802869962947");
-    const unahVs = new centro("UNAH-VS", "15.5299", "-88.0357");
+    const unahTecDanli = new centro("UNAH-TEC-Danlí", "13.99336832671218", "-86.57028033349991");
+    const unahTecAguan = new centro("UNAH-TEC-Aguán", "15.494681447231422", "-86.5802869962947");
     
-    await unahVs.fetchData(); // Esperar hasta que se obtenga la temperatura
+    
+    await unahVs.fetchData();
+    await unahCu.fetchData(); // Esperar hasta que se obtengan los datos
     await unahCurla.fetchData();
-    await unahCu.fetchData();
     await unahCurc.fetchData();
     await unahCurlp.fetchData();
     await unahCurno.fetchData();
@@ -54,19 +55,21 @@
     await unahTecDanli.fetchData();
     await unahTecAguan.fetchData();
 
-    let centers = [unahCu, unahCurc, unahCurla, unahCurlp, unahCurno , unahCuroc, unahTecAguan, unahTecDanli, unahVs];
-    let data = ["name","temperature"/*, "temperatureDescription"*/, "feelsLike", "pressure", "windSpeed"];
+    let centers = [unahCu, unahVs, unahCurc, unahCurla, unahCurlp, unahCurno , unahCuroc, unahTecAguan, unahTecDanli];
+    let data = ["name","temperature", "feelsLike", "pressure", "windSpeed"];
 
 
 
-
-    centers.forEach(center => {
+  centers.forEach(center => {
       data.forEach(idSelector => {
-        var element = document.querySelector(`#${center.name} #${idSelector}`);
-        element.textContent += center[idSelector]; 
+        if ((center.name !== "UNAH-TEC-Aguán" && center.name !== "UNAH-TEC-Danlí") || idSelector !== "name") {
+          var element = document.querySelector(`#${center.name} #${idSelector}`);
+          element.textContent = center[idSelector];
+      }
+      
       });
 
-      let animatedIcon = document.getElementById("animatedIcon")
+      let animatedIcon = document.querySelector(`#${center.name} #animatedIcon`);
       let description = document.querySelector(`#${center.name} #temperatureDescription`);
       switch (center.temperatureDescription) {
         case 'Thunderstorm':
@@ -101,9 +104,13 @@
               animatedIcon.src='svg icons/animated/cloudy.svg'
               description.textContent = ('ALGUNAS NUBES');
               break;
+              case 'smoke':
+                animatedIcon.src='svg icons/animated/cloudy-day-1.svg'
+                description.textContent = ('HUMO');
+                break;
         default:
           animatedIcon.src='svg icons/animated/cloudy-day-1.svg'
-          description.textContent = ('por defecto');
+          description.textContent = center.temperatureDescription;
       }
     });
     
