@@ -17,6 +17,7 @@ body{
   position: relative;
   width: 100%;
   height:80vh;
+  overflow: hidden;
 }
 .card{
   display: flex;
@@ -195,7 +196,7 @@ svg{
   fill: #f2e8e8 !important;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 600px) {
 
   .temp{
     display: inline-flex;
@@ -255,4 +256,18 @@ h2{
   font-size: 1rem;
 }
 
+}
+
+@media (max-height: 650px){
+.cards{
+  min-height: 500px;
+}
+
+.card{
+  min-height: 450px;
+}
+
+/* body{
+  min-height: ;
+} */
 }
