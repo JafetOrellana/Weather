@@ -197,7 +197,10 @@ svg{
 }
 
 @media (min-width: 600px) {
-
+.cards{
+height: 100vh;
+overflow: auto;
+}
   .temp{
     display: inline-flex;
     align-items: center;
@@ -231,6 +234,7 @@ grid-template-columns: 1fr 1fr;
 .card{
   max-width: 30rem;
   max-height: 50rem;
+  top: 6%;
 }
 
 .card-top img{
@@ -265,9 +269,7 @@ h2{
 
 .card{
   min-height: 450px;
+
 }
 
-/* body{
-  min-height: ;
-} */
 }
