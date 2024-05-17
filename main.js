@@ -71,39 +71,36 @@
       let animatedIcon = document.querySelector(`#${center.name} #animatedIcon`);
       let description = document.querySelector(`#${center.name} #temperatureDescription`);
 
-      if (center.temperatureDescription.includes('Thunderstorm')) {
+      if (center.temperatureDescription.includes('thunderstorm')) {
         animatedIcon.src='svg icons/animated/thunder.svg'
         description.textContent = 'TORMENTA';
       }
-      else if (center.temperatureDescription.includes('Drizzle')) {
+      else if (center.temperatureDescription.includes('drizzle')) {
           animatedIcon.src='svg icons/animated/rainy-2.svg'
           description.textContent = ('LLOVIZNA');
       }
-      else if (center.temperatureDescription.includes('Rain')) {
+      else if (center.temperatureDescription.includes('rain')) {
           animatedIcon.src='svg icons/animated/rainy-7.svg'
           description.textContent = ('LLUVIA');
       }
-      else if (center.temperatureDescription.includes('Snow')) {
+      else if (center.temperatureDescription.includes('snow')) {
           animatedIcon.src='svg icons/animated/snowy-6.svg'
             description.textContent = ('NIEVE');
       }
-      else if (center.temperatureDescription.includes('Clear')) {
+      else if (center.temperatureDescription.includes('clear')) {
             animatedIcon.src='svg icons/animated/day.svg'
             description.textContent = ('LIMPIO');
       }
-      else if (center.temperatureDescription.includes('Atmosphere')) {
+      else if (center.temperatureDescription.includes('atmosphere')) {
           animatedIcon.src='svg icons/animated/weather.svg'
             description.textContent = ('ATMOSFERA');
       }
-      else if (center.temperatureDescription.includes('Clouds')) {
+      else if (center.temperatureDescription.includes('clouds')) {
             animatedIcon.src='svg icons/animated/cloudy-day-1.svg'
             description.textContent = ('NUBES');
       }
-      else if (center.temperatureDescription.includes('clouds')) {
-          animatedIcon.src='svg icons/animated/cloudy.svg'
-          description.textContent = ('NUBLADO');
 
-      }
+      
       else if (center.temperatureDescription.includes('smoke')) {
           animatedIcon.src='svg icons/animated/cloudy-day-1.svg'
           description.textContent = ('HUMO');
@@ -111,7 +108,6 @@
       else{
         animatedIcon.src='svg icons/animated/cloudy-day-1.svg'
         description.textContent = center.temperatureDescription;
-        console.log("so");
       }
     });
 

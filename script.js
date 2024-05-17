@@ -3,7 +3,7 @@ let container = document.querySelector('.cards');
 let next = document.getElementById('next');
 let prev = document.getElementById('prev');
 
-let active = 2;
+let active = 4;
 let startX = 0;
 let startY = 0;
 
